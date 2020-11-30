@@ -1,56 +1,61 @@
 import styled from 'styled-components';
 import { About } from '../styles';
+import Toggle from './Toggle';
+import { AnimateSharedLayout } from 'framer-motion';
+import { useScroll } from './useScroll';
+import { scrollReveal } from '../animation';
 const FaqSection = () => {
+  const [element, controls] = useScroll();
   return (
-    <Faq>
+    <Faq
+      variants={scrollReveal}
+      animate={controls}
+      ref={element}
+      initial='hidden'
+    >
       <h2>
         Any Questions <span>FAQ</span>
       </h2>
-      <div className='question'>
-        <h4>How do is start?</h4>
-        <div className='answer'>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde totam
-            iste incidunt.
-          </p>
-        </div>
-        <div className='faq-line'></div>
-      </div>
-
-      <div className='question'>
-        <h4>Daily Schedule?</h4>
-        <div className='answer'>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </div>
-        <div className='faq-line'></div>
-      </div>
-
-      <div className='question'>
-        <h4>Payment Methods?</h4>
-        <div className='answer'>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde totam
-            iste incidunt.
-          </p>
-        </div>
-        <div className='faq-line'></div>
-      </div>
-
-      <div className='question'>
-        <h4>What product do you Offer?</h4>
-        <div className='answer'>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Reprehenderit inventore odit rem hic quam dolore!.
-          </p>
-        </div>
-        <div className='faq-line'></div>
-      </div>
+      <AnimateSharedLayout>
+        <Toggle title='How do is start?'>
+          <div className='answer'>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis
+              tenetur quas maxime sed reiciendis fuga iusto voluptas quisquam
+              praesentium? Quasi, beatae molestiae.
+            </p>
+          </div>
+        </Toggle>
+        <Toggle title='Daily Schedule?'>
+          <div className='answer'>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+        </Toggle>
+        <Toggle title='Payment Method'>
+          <div className='answer'>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde
+              totam iste incidunt. lsgdr lores srsf gjdf.
+            </p>
+          </div>
+        </Toggle>
+        <Toggle title='What product do you Offer?'>
+          <div className='answer'>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Reprehenderit inventore odit rem hic quam dolore!.
+            </p>
+          </div>
+        </Toggle>
+      </AnimateSharedLayout>
     </Faq>
   );
 };
 
 const Faq = styled(About)`
+  @media (max-width: 1300px) {
+    margin-top: 0rem;
+  }
   display: block;
   span {
     display: block;
@@ -66,7 +71,7 @@ const Faq = styled(About)`
     width: 100%;
   }
   .question {
-    padding: 3rem 0rem;
+    padding: 1.8rem 0rem;
     cursor: pointer;
   }
   .answer {

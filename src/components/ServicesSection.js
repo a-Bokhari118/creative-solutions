@@ -3,14 +3,22 @@ import diaphragm from '../img/diaphragm.svg';
 import money from '../img/money.svg';
 import teamwork from '../img/teamwork.svg';
 import home2 from '../img/home2.png';
-
-import { About, Description, Image, Hide } from '../styles';
+import { useScroll } from './useScroll';
+import { About, Description, Image } from '../styles';
 import styled from 'styled-components';
+import { scrollReveal } from '../animation';
+
 const ServicesSection = () => {
+  const [element, controls] = useScroll();
   return (
-    <Servcies>
+    <Servcies
+      variants={scrollReveal}
+      animate={controls}
+      ref={element}
+      initial='hidden'
+    >
       <Image>
-        <img src={home2} alt='home pic' />
+        <img id='imm' src={home2} alt='home pic' />
       </Image>
       <Desc>
         <h2>
@@ -62,6 +70,11 @@ const Servcies = styled(About)`
     width: 70%;
     padding: 2rem 0rem 4rem 0rem;
   }
+  @media (max-width: 1300px) {
+    #imm {
+      display: none;
+    }
+  }
 `;
 
 const Desc = styled(Description)`
@@ -72,6 +85,9 @@ const Desc = styled(Description)`
 const Cards = styled.div`
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 1300px) {
+    justify-content: center;
+  }
 `;
 
 const Card = styled.div`

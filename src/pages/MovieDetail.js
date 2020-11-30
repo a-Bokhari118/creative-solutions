@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { MovieState } from '../movieState';
+
+import { motion } from 'framer-motion';
+import { pageAnimation } from '../animation';
+import ScrollTop from '../components/ScrollTop';
 const MovieDetail = () => {
   const history = useHistory();
   const url = history.location.pathname;
@@ -14,7 +18,12 @@ const MovieDetail = () => {
   return (
     <>
       {movie && (
-        <Details>
+        <Details
+          variants={pageAnimation}
+          initial='hidden'
+          animate='show'
+          exit='exit'
+        >
           <HeadLine>
             <h2>{movie.title}</h2>
             <img src={movie.mainImg} alt={movie.title} />
@@ -27,25 +36,33 @@ const MovieDetail = () => {
           <ImageDisplay>
             <img src={movie.secondaryImg} alt={movie.title} />
           </ImageDisplay>
+          <ScrollTop />
         </Details>
       )}
     </>
   );
 };
 
-const Details = styled.div`
+const Details = styled(motion.div)`
   color: white;
+  @media (max-width: 1300px) {
+    padding: 2rem 2rem;
+  }
 `;
 
 const HeadLine = styled.div`
   min-height: 90vh;
   padding-top: 20vh;
   position: relative;
+
   h2 {
     position: absolute;
     top: 10%;
     left: 50%;
     transform: translate(-50%, -10%);
+    @media (max-width: 1300px) {
+      font-size: 3.2rem;
+    }
   }
   img {
     width: 100%;
@@ -60,6 +77,10 @@ const Awards = styled.div`
   margin: 5rem 10rem;
   align-items: center;
   justify-content: space-around;
+  @media (max-width: 1300px) {
+    display: block;
+    margin: 2rem 2rem;
+  }
 `;
 
 const AwardStyle = styled.div`
